@@ -1,50 +1,159 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+<!DOCTYPE html>
+<html lang="zh">
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+<head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible">
+                <meta name="viewport">
+                <meta name="viewport" content="width=320,maximum-scale=1.3,user-scalable=no">
+                <title>春促提质计算</title>
+</head>
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+<body>
+                <form method="post" name="formName" action="">
+                                是否白名单：<input type="radio" name="w" id="w" value="1">是
+                                <input type="radio" name="w" id="w" value="0" checked="checked">否<br />
+                                是否锁定价值：<input type="radio" value="1" id="v" name="v">是
+                                <input type="radio" name="v" id="w" value="0" checked="checked">否<br />
+                                锁定价值：<input type="number" id="suoding" name="suoding" value=""
+                                                placeholder="没有锁定不要填写" /><br />
+                                是否有幸福全家：<input type="radio" value="1" id="f" name="f">是
+                                <input type="radio" name="f" value="0" id="f" checked="checked">否<br />
+                                原来套餐值：<input type="number" id="old" name="old" value="" placeholder="请输入原来的套餐值" /><br />
+                                现在套餐值：<input type="number" id="new" name="new" value="" placeholder="请输入现在的套餐值" /><br />
+                                <input type="submit" onclick="start() " />
+                </form>
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+</body>
+<body>
+<!-- 
+    作者：曹桉财
+    时间：2022/11/30 -->
+    <div class="footer">caoancai@copy2022</div>
+</body>
 
-# Allow one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+<script>
 
-jobs:
-  # Build job
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+                function start() {
+                                var v1 = document.forms["formName"]["old"].value;
+                                var v2 = document.forms["formName"]["new"].value;
+                                var v3 = document.forms["formName"]["suoding"].value;
+                                x = v2 - v1;
+                                y = v2 - v3;
+                                var n1 = document.forms["formName"]["w"].value;
+                                var n2 = document.forms["formName"]["v"].value;
+                                var n3 = document.forms["formName"]["f"].value;
+                                var temp = "";
+                                var temp2 = "";
+                                if (v2 >= 129) {
+                                                if (n1 == 0) {
+                                                                if (n2 == 1) {
+                                                                                if (v2 >= 199 && y >= 60 && n3 == 1) {
 
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+
+                                                                                                temp = "可以使用 流量畅享 权益";
+                                                                                }
+                                                                                else {
+                                                                                                if (y >= 70) {
+                                                                                                                temp = "只可以使用 享受补贴 权益"
+                                                                                                }
+                                                                                                else {
+                                                                                                                temp = "不满足锁定价值规则，无法享受权益";
+                                                                                                }
+                                                                                }
+
+                                                                }
+                                                                else {
+                                                                                if (v2 >= 199 && x >= 60 && n3 == 1) {
+                                                                                                temp = "可以使用 流量畅享 权益";
+                                                                                }
+                                                                                else {
+                                                                                                if (x >= 30) {
+                                                                                                                temp = "只可以使用 享受补贴 权益"
+                                                                                                }
+
+                                                                                }
+                                                                }
+
+                                                }
+                                                else {
+                                                                if (n2 == 1) {
+                                                                                if (x >= 70) {
+                                                                                                temp = "可以使用 流量畅享 权益";
+                                                                                }
+                                                                                else {
+                                                                                                temp = "不满足锁定价值规则，无法享受权益";
+                                                                                }
+                                                                }
+                                                                else {
+                                                                                if (x >= 30) {
+                                                                                                temp = "可以使用 流量畅享 权益"
+                                                                                }
+                                                                }
+
+                                                }
+
+                                }
+                                else {
+                                                if (x >= 30) {
+                                                                temp = "只可以使用 享受补贴 权益";
+                                                }
+                                                else {
+                                                                temp = "无法享受权益";
+                                                }
+                                }
+                                if (n2 == 1 && v3 == "") {
+                                                temp = "请正确填写锁定价值项"
+                                }
+                                if (x>=100){
+                                    temp2 = ",权益金：600元；新合约：1680元。"
+                                }
+                                else{
+                                    if(x>=70){
+                                    temp2 = ",权益金：600元；新合约：1200元。"
+                                    }
+                                    else{
+                                        if(x>=40){
+                                            temp2 = ",权益金：300元；新合约：720元。"
+                                        }
+                                        else{
+                                            temp2 = "，权益金：300元；无法办理新合约。"
+                                        }
+                                    }
+                                }
+                                if(x<30){
+                                    temp2 = ",无法使用权益金；无法办理新合约。"
+                                }
+                                alert(temp+temp2)
+                                window.location.href="春促提质.html"
+                                // confirm(temp)
+
+
+                }
+
+
+
+
+
+</script>
+<style>
+    .footer{
+	height: 30px;
+	line-height: 35px;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	background-color: darkslategrey;
+	color: #fff;
+	font-family: Arial;
+	font-size: 14px;
+	letter-spacing: 1px;
+}
+</style>
+
+
+
+
+
+</html>
